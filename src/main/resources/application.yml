@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:mysql://10.0.0.240:3306/yuanjuren_db?characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+
+logging:
+  config: classpath:logback-spring.xml
+  path: /home/log/files-import
+#  path: C:/Users/asus/Desktop
+
+compare:
+  host: http://10.0.0.240:59992
+
+
+fdfs:
+  soTimeout: 1500
+  connectTimeout: 600
+  trackerList:
+    - 10.0.0.240:22122
+#    - 192.168.0.202:22122
+
+
+custom:
+  import:
+    destory: C:\Users\asus\Desktop\asd
+    filenameformate: 1 #1.姓名_生份证号码，2.身份证号码_姓名 3.单独姓名，4单独身份证号码
+    areaId: 1

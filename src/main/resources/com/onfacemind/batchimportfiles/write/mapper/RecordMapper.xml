@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.onfacemind.batchimportfiles.write.mapper.RecordMapper" >
+  <resultMap id="BaseResultMap" type="com.onfacemind.batchimportfiles.write.pojo.Record" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="valid_period" property="validPeriod" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="ethnicity" property="ethnicity" jdbcType="VARCHAR" />
+    <result column="nation" property="nation" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="CHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="date_of_birth" property="dateOfBirth" jdbcType="DATE" />
+    <result column="temp_id" property="tempId" jdbcType="VARCHAR" />
+    <result column="face_total" property="faceTotal" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="has_warn" property="hasWarn" jdbcType="CHAR" />
+    <result column="warn_num" property="warnNum" jdbcType="VARCHAR" />
+    <result column="has_finger" property="hasFinger" jdbcType="CHAR" />
+    <result column="warn_analyse" property="warnAnalyse" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, number, id_card, valid_period, name, ethnicity, nation, gender, age, location, 
+    address, date_of_birth, temp_id, face_total, state, remark, has_warn, warn_num, has_finger, 
+    warn_analyse
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.onfacemind.batchimportfiles.write.pojo.RecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from population_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from population_record
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from population_record
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.onfacemind.batchimportfiles.write.pojo.RecordExample" >
+    delete from population_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.onfacemind.batchimportfiles.write.pojo.Record" >
+    insert into population_record (id, number, id_card, 
+      valid_period, name, ethnicity, 
+      nation, gender, age, location, 
+      address, date_of_birth, temp_id, 
+      face_total, state, remark, 
+      has_warn, warn_num, has_finger, 
+      warn_analyse)
+    values (#{id,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+      #{validPeriod,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{ethnicity,jdbcType=VARCHAR}, 
+      #{nation,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, #{age,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{dateOfBirth,jdbcType=DATE}, #{tempId,jdbcType=VARCHAR}, 
+      #{faceTotal,jdbcType=INTEGER}, #{state,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{hasWarn,jdbcType=CHAR}, #{warnNum,jdbcType=VARCHAR}, #{hasFinger,jdbcType=CHAR}, 
+      #{warnAnalyse,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.onfacemind.batchimportfiles.write.pojo.Record" >
+    insert into population_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="validPeriod != null" >
+        valid_period,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="ethnicity != null" >
+        ethnicity,
+      </if>
+      <if test="nation != null" >
+        nation,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="dateOfBirth != null" >
+        date_of_birth,
+      </if>
+      <if test="tempId != null" >
+        temp_id,
+      </if>
+      <if test="faceTotal != null" >
+        face_total,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="hasWarn != null" >
+        has_warn,
+      </if>
+      <if test="warnNum != null" >
+        warn_num,
+      </if>
+      <if test="hasFinger != null" >
+        has_finger,
+      </if>
+      <if test="warnAnalyse != null" >
+        warn_analyse,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="validPeriod != null" >
+        #{validPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ethnicity != null" >
+        #{ethnicity,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="dateOfBirth != null" >
+        #{dateOfBirth,jdbcType=DATE},
+      </if>
+      <if test="tempId != null" >
+        #{tempId,jdbcType=VARCHAR},
+      </if>
+      <if test="faceTotal != null" >
+        #{faceTotal,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="hasWarn != null" >
+        #{hasWarn,jdbcType=CHAR},
+      </if>
+      <if test="warnNum != null" >
+        #{warnNum,jdbcType=VARCHAR},
+      </if>
+      <if test="hasFinger != null" >
+        #{hasFinger,jdbcType=CHAR},
+      </if>
+      <if test="warnAnalyse != null" >
+        #{warnAnalyse,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.onfacemind.batchimportfiles.write.pojo.RecordExample" resultType="java.lang.Integer" >
+    select count(*) from population_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update population_record
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null" >
+        id_card = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.validPeriod != null" >
+        valid_period = #{record.validPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ethnicity != null" >
+        ethnicity = #{record.ethnicity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nation != null" >
+        nation = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=CHAR},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.location != null" >
+        location = #{record.location,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dateOfBirth != null" >
+        date_of_birth = #{record.dateOfBirth,jdbcType=DATE},
+      </if>
+      <if test="record.tempId != null" >
+        temp_id = #{record.tempId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faceTotal != null" >
+        face_total = #{record.faceTotal,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=CHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hasWarn != null" >
+        has_warn = #{record.hasWarn,jdbcType=CHAR},
+      </if>
+      <if test="record.warnNum != null" >
+        warn_num = #{record.warnNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hasFinger != null" >
+        has_finger = #{record.hasFinger,jdbcType=CHAR},
+      </if>
+      <if test="record.warnAnalyse != null" >
+        warn_analyse = #{record.warnAnalyse,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update population_record
+    set id = #{record.id,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=VARCHAR},
+      id_card = #{record.idCard,jdbcType=VARCHAR},
+      valid_period = #{record.validPeriod,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      ethnicity = #{record.ethnicity,jdbcType=VARCHAR},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=CHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      location = #{record.location,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      date_of_birth = #{record.dateOfBirth,jdbcType=DATE},
+      temp_id = #{record.tempId,jdbcType=VARCHAR},
+      face_total = #{record.faceTotal,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=CHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      has_warn = #{record.hasWarn,jdbcType=CHAR},
+      warn_num = #{record.warnNum,jdbcType=VARCHAR},
+      has_finger = #{record.hasFinger,jdbcType=CHAR},
+      warn_analyse = #{record.warnAnalyse,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onfacemind.batchimportfiles.write.pojo.Record" >
+    update population_record
+    <set >
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="validPeriod != null" >
+        valid_period = #{validPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ethnicity != null" >
+        ethnicity = #{ethnicity,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="dateOfBirth != null" >
+        date_of_birth = #{dateOfBirth,jdbcType=DATE},
+      </if>
+      <if test="tempId != null" >
+        temp_id = #{tempId,jdbcType=VARCHAR},
+      </if>
+      <if test="faceTotal != null" >
+        face_total = #{faceTotal,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="hasWarn != null" >
+        has_warn = #{hasWarn,jdbcType=CHAR},
+      </if>
+      <if test="warnNum != null" >
+        warn_num = #{warnNum,jdbcType=VARCHAR},
+      </if>
+      <if test="hasFinger != null" >
+        has_finger = #{hasFinger,jdbcType=CHAR},
+      </if>
+      <if test="warnAnalyse != null" >
+        warn_analyse = #{warnAnalyse,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onfacemind.batchimportfiles.write.pojo.Record" >
+    update population_record
+    set number = #{number,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      valid_period = #{validPeriod,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      ethnicity = #{ethnicity,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      age = #{age,jdbcType=INTEGER},
+      location = #{location,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      date_of_birth = #{dateOfBirth,jdbcType=DATE},
+      temp_id = #{tempId,jdbcType=VARCHAR},
+      face_total = #{faceTotal,jdbcType=INTEGER},
+      state = #{state,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      has_warn = #{hasWarn,jdbcType=CHAR},
+      warn_num = #{warnNum,jdbcType=VARCHAR},
+      has_finger = #{hasFinger,jdbcType=CHAR},
+      warn_analyse = #{warnAnalyse,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
